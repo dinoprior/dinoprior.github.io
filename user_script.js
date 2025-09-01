@@ -9,8 +9,8 @@ window.onscroll = function () {
 
 function scrollFunction() {
   if (
-    document.body.scrollTop > 10 ||
-    document.documentElement.scrollTop > 10
+    document.body.scrollTop > 20 ||
+    document.documentElement.scrollTop > 20
   ) {
     mybutton.style.display = "block";
   } else {
@@ -42,4 +42,5 @@ function backToTop() {
 
   requestAnimationFrame(animateScroll);
 }
+
 
