@@ -1,11 +1,28 @@
-*{
-color:#222;
-}
+      .jumbo {
+        background-image: url("gp2-5-1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
 
-h1 {
-    color: brown;
-}
+      .jumbo2 {
+        background-image: url("gp1-1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
 
-h2 {
-    color: darkgreen;
-}
+      .kapsa {
+        background-image: url("kapsa.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 480px;
+      }
+      
+        @media (max-width: 392px) {
+    .buy-btn {
+      margin-top: 1rem; /* odskok jen pod 400px */  
+      
+    }
+  }
