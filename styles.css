@@ -22,7 +22,8 @@
       
         @media (max-width: 392px) {
     .buy-btn {
-      margin-top: 1rem; /* odskok jen pod 400px */  
+      margin-top: 1rem;
       
     }
   }
+
