@@ -1,3 +1,19 @@
+// fader
+document.addEventListener("DOMContentLoaded", () => {
+  const tags = document.querySelectorAll(".fader");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target); // přestane sledovat (animace jen jednou)
+      }
+    });
+  }, { threshold: 0.5 }); // 10 % prvku musí být vidět
+
+  tags.forEach(fader => observer.observe(fader));
+});
+
 
 // Get the button
 let mybutton = document.getElementById("btn-back-to-top");
@@ -23,7 +39,7 @@ mybutton.addEventListener("click", backToTop);
 
 function backToTop() {
   const start = window.scrollY;
-  const duration = 800; // délka animace v ms
+  const duration = 500; // délka animace v ms
   const startTime = performance.now();
 
   function animateScroll(currentTime) {
@@ -100,4 +116,4 @@ window.addEventListener("scroll", function () {
       }
     });
 
-// redirect
+
