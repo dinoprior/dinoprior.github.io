@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.unobserve(entry.target); // přestane sledovat (animace jen jednou)
       }
     });
-  }, { threshold: 0.5 }); // 10 % prvku musí být vidět
+  }, { threshold: 0.2 }); // 10 % prvku musí být vidět
 
   tags.forEach(fader => observer.observe(fader));
 });
