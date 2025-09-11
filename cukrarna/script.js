@@ -90,6 +90,7 @@ window.addEventListener("scroll", function () {
   header.classList.toggle("bg-white", scrolled);
 });
 
+
 // fader objekt
 document.addEventListener("DOMContentLoaded", () => {
   const tags = document.querySelectorAll(".tag");
@@ -101,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.unobserve(entry.target); // přestane sledovat (animace jen jednou)
       }
     });
-  }, { threshold: 0.2 }); // 10 % prvku musí být vidět
+  }, { threshold: 0.1 }); // 10 % prvku musí být vidět
 
   tags.forEach(tag => observer.observe(tag));
 });
