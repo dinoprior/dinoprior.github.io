@@ -7,84 +7,8 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap');
-</style> 
-	
-<style>
-	
-	body, html {
-  height: 100%;
-  margin: 0;
-		scroll-behavior: smooth;
-		font-family:  "Roboto";
-	
-}
-	
-	h1 {
-		font-size: 5rem;
-		font-family: 'Dancing Script', cursive;
-		margin: 3rem 0;
-	}
-	
-		h2 {
-		font-size: 3rem;
-		font-family: 'Dancing Script', cursive;
-		
-	}
-	
-	#intro {
-		 height: 100%; 
-	background-image: url("head.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		
-	}
-	
-	nav {
-	transition: all 0.2s ease;	
-		background-color: rgba(255, 255, 255, 0.6);
-	}
-	
-	
-	#mynavbar a {
-		text-align: center;
-		color: black;
-		
-	}
-	
-	#galerie a {
-		margin-bottom: 1rem;
-	}
 
-.tag {
-  opacity: 0;
-  transition: all 0.4s ease-out;
-}
-
-/* směry podle className */
-.frombottom {
-  transform: translateY(10vh);
-}
-.fromtop {
-  transform: translateY(-10vh);
-}
-.fromleft {
-  transform: translateX(-10vw);
-}
-.fromright {
-  transform: translateX(10vw);
-}
-
-.visible {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-	
-	</style>
-	
-	
+<link rel="stylesheet" href="styles.css">
 	
 </head>
 <body>
@@ -129,7 +53,7 @@
 </nav>
 	
 	 <div id="intro" class="container-fluid p-5 d-flex align-items-center">
-	 <div>	 
+	 <div class="opac">	 
 	<h3>dorty - koláče - sladkosti - káva</h3>	 
 		 
   <h1>Cukrárna a kavárna</h1>
@@ -279,7 +203,7 @@ Sobota a Neděle: 10:00-18:00</p>
 	<div class="row gx-5">			
 			<div class="col-md-6">
 			
-<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2152.9786441649935!2d14.430295461390445!3d50.07997023405798!3m2!1i1024!2i768!4f13.1!5e0!3m2!1scs!2scz!4v1697115747599!5m2!1scs!2scz" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2152.9786441649935!2d14.430295461390445!3d50.07997023405798!3m2!1i1024!2i768!4f13.1!5e0!3m2!1scs!2scz!4v1697115747599!5m2!1scs!2scz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 			
 			</div>
 			
@@ -300,7 +224,7 @@ Praha 1
 			</p>
 		<p class="mb-4">Tel.: 777 123 456</p>	
 	</div>		
-	<div class="col-md-6">		 <p class="mb-4">Pondělí až Pátek: 7:30 – 17:30<br>
+	<div class="col-md-6 mb-4">		 <p class="mb-4">Pondělí až Pátek: 7:30 – 17:30<br>
 
 Sobota a Neděle: 10:00-18:00</p>
 		
