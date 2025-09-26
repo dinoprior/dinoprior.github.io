@@ -241,27 +241,26 @@ p:last-child {
     background: #fff;
     cursor: pointer;
   }
-  .dot.active { background: #000; }
+  .dot.active {
+    background: #000;
+}
 
-#galleryTrack { transition: transform 0.4s ease; cursor: grab; user-select: none; -webkit-user-drag: none; }
-#galleryTrack.grabbing { cursor: grabbing; }
-
-  .gallery-slide { flex: 0 0 auto; }
+  .gallery-track {
+    transition: transform 0.45s ease;
+}
+  .gallery-slide {
+    flex: 0 0 auto;
+    cursor: pointer;
+}
   .gallery-dot {
     width: 10px; height: 10px;
     border-radius: 50%;
     background: var(--yellow);
     cursor: pointer;
   }
-  .gallery-dot.active { background: var(--yellow); opacity: 50% }
-  #galleryLightbox img { 
-    max-height: 90vh;
-}
+  .gallery-dot.active { background: #fff; }
+  #galleryLightbox img { max-height: 90vh; }
 
-
-.gallery-zoomable {
-  cursor: pointer;
-}
 
 #galleryLightbox {
   opacity: 0;
