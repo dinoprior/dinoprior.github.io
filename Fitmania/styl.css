@@ -541,12 +541,15 @@ display: none;
   font-weight: 800;
   font-style: normal;
   color: #fff;
-  font-size: 1.65rem;
+  font-size: 1.55rem;
   text-align: center;
   line-height: 100%;
   margin-bottom: 2rem;
 }
 
+    .modal p, .modal ul li {
+    font-size: 14px;
+  }
   
 }
   
