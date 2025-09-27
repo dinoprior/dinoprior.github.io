@@ -36,14 +36,10 @@
      <li class="nav-item me-0 me-sm-2"> <a href="#vybaveni" class="yellow_bg but nav-link">Vybavení</a></li>
      <li class="nav-item me-0 me-sm-2"> <a href="#" class="yellow_bg but nav-link">Rezervace</a></li>
        <li class="nav-item me-0 me-sm-2"><a href="#kontakt" class="yellow_bg but nav-link">Kontakt</a></li>
-     <li class="nav-item me-0 me-sm-2"> <a href="#" class="yellow_bg but nav-link">Přihlášení</a></li>
+     <li class="nav-item me-0 me-sm-2"> <a href="#" class="yellow_bg but nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Přihlášení</a></li>
        </ul>  
    </div> 
-        
-  <div class="soc me-0 me-lg-5 d-inline-block">
-    <a href="#"> <i class="bi bi-facebook" style="font-size: 2.25rem; color: rgb(255, 195, 61);"></i></a>
-      <a href="#"> <i class="bi bi-instagram" style="font-size: 2.25rem; color: rgb(255, 195, 61);"></i></a>
- </div>   
+ 
    
 <a href="index.html" class="logo1"><img src="images/logo_bile.png" class="img-fluid "></a>
    
@@ -51,10 +47,56 @@
 </nav> 
   </div> 
 
-     <a href="index.html" class="logo2"><img src="images/logo_bile.png" class="img-fluid"></a>
+    <!-- modal prihlaseni start -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <!-- Hlavička -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Přihlášení</h5> 
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
+      </div>
 
+      <!-- Tělo -->
+      <div class="modal-body">
+        <form>
+          <!-- E-mail -->
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="loginEmail" placeholder="zadejte e-mail">
+          </div>
+
+          <!-- Heslo -->
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Heslo</label>
+            <input type="password" class="form-control" id="loginPassword" placeholder="zadejte heslo">
+          </div>
+
+          <!-- Odkazy -->
+          <div class="d-flex justify-content-between">
+            <a href="#" class="small">Ještě nejste registrovaní?</a>
+            <a href="#" class="small">Zapomenuté heslo</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Paticka -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+        <button type="submit" class="btn btn-warning">Přihlásit</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- modal prihlaseni konec -->
   
-    <div class="container  my-3 my-md-5">
+     <a href="index.html" class="logo2 text-center"><img src="images/logo_bile.png" class="img"></a>
+
+    <div class="centering">
+      <div class="headline mb-0 mb-sm-5" style="color: var(--yellow);">Fitmania - Vaše nové fitko</div>
+      
+    <div class="container  my-3 my-md-4">
   <div class="row justify-content-between gx-0">
     <div class="col p-2 p-md-3 p-lg-4 mb-3 mb-md-0 opac_leva">
        <h3>Otevírací doba</h3>
@@ -95,7 +137,7 @@
   <div class="row justify-content-between gx-0">
     <div class="col-12 col-md-3 mb-3 mb-md-0 ycard">
        <a href="#" class="text-decoration-none text-black">
-    <div class="yellow_bg p-3 p-lg-4 rounded-4 h-100">  <h2>První vstup zdarma</h2>
+    <div class="yellow_bg p-3 p-lg-4 rounded-4 h-100">  <h2 class="smaller">První vstup zdarma</h2>
       
       <i class="bi bi-arrow-right sipka"></i>      
       </div></a>
@@ -104,7 +146,7 @@
   <div class="col-12 col-md-3  mb-3 mb-md-0 ycard">
     <a href="#vybaveni" class="text-decoration-none text-black">
     <div class="yellow_bg p-3 p-lg-4 rounded-4 h-100">
-     <h2>Moderní vybavení</h2>
+     <h2 class="smaller">Moderní vybavení</h2>
     
         <i class="bi bi-arrow-right sipka"></i>
     </div></a>
@@ -112,17 +154,21 @@
    
      <div class="col-12 col-md-3 ycard"> <a href="#treneri" class="text-decoration-none text-black">
     <div class="yellow_bg p-3 p-lg-4 rounded-4 h-100">
-    <h2>Zkušení trenéři</h2>
+    <h2 class="smaller">Zkušení trenéři</h2>
        
          <i class="bi bi-arrow-right sipka"></i>  
        </div></a>
     </div>
   </div>
 </div>
-  
-
-   <div class="text-center bumper d-none"> <i class="bi bi-arrow-down-circle-fill" style="font-size: 3rem; color: rgb(255, 195, 61);"></i></div>
         
+  <div class=" container mt-5 pt-5 soc text-center border-top">
+    <a href="#"> <i class="bi bi-facebook me-3" style="font-size: 3.25rem; color: rgb(255, 195, 61);"></i></a>
+      <a href="#"> <i class="bi bi-instagram ms-3" style="font-size: 3.25rem; color: rgb(255, 195, 61);"></i></a>
+ </div>  
+
+   <div class="text-center bounce"> <a href="#novinky"><i class="bi bi-arrow-down-circle-fill" style="font-size: 3rem; color: rgb(255, 195, 61);"></i></a></div>
+  </div> <!-- centering -->      
 
 </div><!-- jumbotron konec --> 
 
@@ -439,7 +485,7 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
         <div class="row justify-content-center align-items-center h-100">
          <div class="col-8 cenik_karta">
           <h2>První vstup zdarma</h2>
-           <p>Registrujte se <i class="bi bi-arrow-right"></i>  </p>
+           <p><a href="#" class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">Registrujte se <i class="bi bi-arrow-right"></i></a>  </p>
           </div>
          </div>
         </div>
@@ -481,8 +527,8 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
     </div></a>
   </div>
 <!-- Modal Trenér 1 -->
-<div class="modal fade" id="trainerModal1" tabindex="-1" aria-labelledby="trainerModal1Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal" id="trainerModal1" tabindex="-1" aria-labelledby="trainerModal1Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
        
@@ -490,7 +536,7 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
       </div>
       <div class="modal-body">
         <div class="container-fluid"><div class="row">
-             <div class="col ratio ratio_4-3">
+             <div class="col ratio ratio_4-3 trener-img">
         <img src="images/tren1.jpg" alt="Jiří Novák" class="img-fluid rounded object-fit-cover"></div> 
       <div class="col">     
         <h3 class="modal-title mb-3" id="trainerModal1Label">Jiří Novák</h3> 
@@ -538,16 +584,17 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
     </div>
   </div>
 <!-- Modal Trenér 2 -->
-<div class="modal fade" id="trainerModal2" tabindex="-1" aria-labelledby="trainerModal1Labe2" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal" id="trainerModal2" tabindex="-1" aria-labelledby="trainerModal1Labe2" aria-hidden="true">
+  <div class="modal-dialog modal-lg  modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
        
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
       </div>
-      <div class="modal-body">
-        <div class="container-fluid"><div class="row">
-             <div class="col ratio ratio_4-3">
+ <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+             <div class="col ratio ratio_4-3 trener-img">
         <img src="images/tren3.jpg" alt="Dita Malá" class="img-fluid rounded object-fit-cover"></div> 
       <div class="col">     
         <h3 class="modal-title mb-3" id="trainerModal2Label">Dita Malá</h3> 
@@ -595,8 +642,8 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
     </div>
   </div>
 <!-- Modal Trenér 3 -->
-<div class="modal fade" id="trainerModal3" tabindex="-1" aria-labelledby="trainerModal1Labe3" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal" id="trainerModal3" tabindex="-1" aria-labelledby="trainerModal1Labe3" aria-hidden="true">
+  <div class="modal-dialog modal-lg  modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
        
@@ -604,7 +651,7 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
       </div>
       <div class="modal-body">
         <div class="container-fluid"><div class="row">
-             <div class="col ratio ratio_4-3">
+             <div class="col ratio ratio_4-3 trener-img">
         <img src="images/tren2.jpg" alt="Martin Kasík" class="img-fluid rounded object-fit-cover"></div> 
       <div class="col">     
         <h3 class="modal-title mb-3" id="trainerModal3Label">Martin Kasík</h3> 
@@ -652,8 +699,8 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
   </div>  
     
    <!-- Modal Trenér 4 -->
-<div class="modal fade" id="trainerModal4" tabindex="-1" aria-labelledby="trainerModal1Labe4" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal" id="trainerModal4" tabindex="-1" aria-labelledby="trainerModal1Labe4" aria-hidden="true">
+  <div class="modal-dialog modal-lg  modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
        
@@ -661,8 +708,8 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
       </div>
       <div class="modal-body">
         <div class="container-fluid"><div class="row">
-             <div class="col ratio ratio_4-3">
-        <img src="images/tren4.jpg" alt="Martin Kasík" class="img-fluid rounded object-fit-cover"></div> 
+             <div class="col ratio ratio_4-3 trener-img">
+        <img src="images/tren4.jpg" alt="Lenka Szabová" class="img-fluid rounded object-fit-cover "></div> 
       <div class="col">     
         <h3 class="modal-title mb-3" id="trainerModal4Label">Lenka Szabová</h3> 
  <p>Fitness trenérka a nutriční specialistka, která spojuje pohyb a zdravou výživu.</p>
@@ -726,7 +773,7 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
       <div class="col-md-4 col-6">
        <h3 class="yellow"> Užitečné</h3>
 
-<p>Členství 	&#62; </p>
+        <p><a href="#" class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">Členství 	&#62;</a> </p>
 
 <p><a href="#novinky"  class="text-white text-decoration-none">Novinky 	&#62;</a> </p>
 
@@ -785,6 +832,20 @@ Neomezená délka cvičení, v ceně sauna, sprcha.</p>
     </div>      <!-- banery konec--> 
     
     
+    <!-- top scroll -->
+     <div id="back-to-top" class="pointer">     
+  <svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="3rem" viewBox="0 0 16 16" fill="currentColor" class="custom-icon">
+    <!-- Žlutý kruh s černým obrysem -->
+    <circle cx="8" cy="8" r="7" fill="rgb(255, 195, 61)" stroke="black" stroke-width="1"/>
+    <!-- Černá šipka -->
+    <path fill="black" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 
+      2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 
+      0 0 0-.708 0l-3 3a.5.5 0 1 0 
+      .708.708L7.5 5.707V11.5A.5.5 0 0 0 
+      8 12z"/>
+  </svg>
+</div>
+     <!-- top scroll -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
