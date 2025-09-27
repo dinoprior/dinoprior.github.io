@@ -596,9 +596,12 @@ display: none;
   margin-bottom: 2rem;
 }
 
-    .modal p, .modal ul li, .kontakt_dole p{
+  .kontakt_dole p{
     font-size: 14px;
   }
-  
+     .modal p, .modal ul li {
+    font-size: 13px;
+       line-height: 1.1rem;
+  } 
 }
   
