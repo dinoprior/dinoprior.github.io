@@ -1,4 +1,10 @@
-      .jumbo {
+html, body {
+  width: auto!important;
+  overflow-x: hidden!important;
+    font-family: 'Trebuchet MS', sans-serif;
+}      
+
+.jumbo {
         background-image: url("gp2-5-1.png");
         background-repeat: no-repeat;
         background-position: center;
@@ -26,17 +32,140 @@
   bottom: 20px;
   right: 20px;
   display: none;
+        z-index: 10;
 }
 
-.nav-link:hover {
-  font-weight: bold;
-  text-decoration: underline;
+/* --- animace underline start--- */
+
+.navbar-nav a  {
+  position: relative;
+  text-decoration: none; /* vypnout default underline */
+  
 }
 
-.nav-link:active {
-  font-weight: normal;
-  text-decoration: none;
+.navbar-nav a::after  {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0; /* odsazení pod text */
+  width: 100%;
+  height: 3px; /* tloušťka čáry */
+  background: currentColor; /* stejné jako barva textu */
+  transform: scaleX(0); /* schované */
+  transform-origin: left; /* začíná vlevo */
+  transition: transform 0.3s ease;
+  }
+
+.navbar-nav a:hover::after {
+  transform: scaleX(1); /* postupně se objeví */
 }
+
+@media (min-width: 576px) {
+  .navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 6px;
+  }
+}
+
+/* zrusi podtrzeni */
+@media (max-width: 575.98px) {
+.navbar-nav a::after { display: none; }
+  }
+
+
+
+/* Hamburger - 3 čáry */
+.navbar-toggler {
+  border: none;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	box-shadow: none !important; /* zruší focus ring */
+}
+
+/* Hamburger čáry */
+.navbar-toggler span,
+.navbar-toggler span::before,
+.navbar-toggler span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.navbar-toggler span {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navbar-toggler span::before {
+  content: '';
+  top: -10px;
+}
+
+.navbar-toggler span::after {
+  content: '';
+  top: 10px;
+}
+
+/* Po otevření menu → křížek */
+.navbar-toggler:not(.collapsed) span {
+  background-color: transparent; /* střední čára zmizí */
+}
+
+.navbar-toggler:not(.collapsed) span::before {
+  transform: rotate(45deg) translate(5px, 4px);
+}
+
+.navbar-toggler:not(.collapsed) span::after {
+  transform: rotate(-45deg) translate(10px, -10px);
+}
+
+
+/* --- fader start--- */
+
+.tag {
+  opacity: 0;
+  transition-property: all;
+  transition-timing-function: ease-out;
+}
+
+/* čistý fade-in bez pohybu */
+.fadein {
+  transform: none;
+  transition-duration: 0.8s;   /* střední */
+}
+
+/* fade-in směr + vlastní rychlost */
+.from-bottom {
+  transform: translateY(10vh);
+  transition-duration: 0.6s;   /* střední */
+}
+.from-top {
+  transform: translateY(-10vh);
+  transition-duration: 0.4s;   /* rychlejší */
+}
+.from-left {
+  transform: translateX(-10vw);
+  transition-duration: 0.9s;   /* pomalejší */
+}
+.from-right {
+  transform: translateX(10vw);
+  transition-duration: 0.7s;
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+/* --- fader konec --- */
 
   @media (min-width: 768px) {
     .opacity-lg-0 {
