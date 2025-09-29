@@ -1,3 +1,19 @@
+// fader 
+document.addEventListener("DOMContentLoaded", () => {
+  const tags = document.querySelectorAll(".tag");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target); // přestane sledovat (animace jen jednou)
+      }
+    });
+  }, { threshold: 0.2 }); // 10 % prvku musí být vidět
+
+  tags.forEach(tag => observer.observe(tag));
+});
+
 
 // Get the button
 let mybutton = document.getElementById("btn-back-to-top");
