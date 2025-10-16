@@ -437,7 +437,7 @@ function setBgGreet() {
 // Get Name
 function getJmeno() {
     if(localStorage.getItem('jmeno') === null) {
-        jmeno.textContent = 'Zadejte své jméno';
+        jmeno.textContent = '(napište oslovení)';
     } else {
         jmeno.textContent = localStorage.getItem('jmeno');
     }}
