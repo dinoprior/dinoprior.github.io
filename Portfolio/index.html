@@ -1,148 +1,586 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fullscreen Layout Page Transitions</title>
-    
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio Pavel Doubravský</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
     
 <style>
-    
-   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap'); 
-    
-  * {
-      box-sizing:border-box;
-    }
-    
-  body, html { height:100%;  font-family: "IBM Plex Mono", monospace; overflow:hidden; background:#000; }
-  .section {
-  position: absolute;
-  z-index: 0;
-  width: 50%;
-  height: 50%;
-  cursor: pointer;
-  transform: scale3d(1, 1, 1);
-  will-change: transform, opacity, contents;
-  transition-duration: 0.6s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+
+  
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+  
+  
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow:hidden;
+ 
 }
-    
-  /* Přidat na začátek CSS */
-.visible {
-  display: none; 
-    font-size: 1rem;
-    line-height: 1.5rem;
-     
+
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  --blue:#0066FF;
+}
+
+h1 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: normal;
   }
 
-.section.is-expanded .visible {
-  display: block;      /* zobrazí se, když je sekce rozkliknutá */
+h2 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-weight: normal;
+}
+
+h3 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(1.15rem, 2vw, 2rem);
+    font-weight: normal;
+    margin-bottom: 2rem;
+}
+
+h4 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(1rem, 1.15vw, 1.65rem);
+    font-weight: normal;
+    margin-bottom: 1.25rem;
+}
+
+h5 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(1rem, 1vw, 1.45rem);
+    font-weight: normal;
+    line-height: 150%;
+    margin-bottom: 0;
+}
+
+p {
+     font-family: "IBM Plex Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+}
+  
+     .contact-info {
+  padding-top: 1.5rem;
+       margin: 0rem 0rem 3.4rem 5rem;
+      
+    }
+  
+     a {
+      text-decoration: none;
+    }
+    .contact-info i {
+      font-size: 1.3rem;
+      margin-right: 0.5rem;
+    }
+    textarea.form-control {
+      min-height: 40px !important;
+      height: 40px;
+    }
+
+   .form-control {
+    border-radius: 0;
+    border: none;
+      border-bottom: 1px solid ;
+    }
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+  .nav {
+  position: absolute;
+  top: 50%;
+    right: 1rem;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+} 
+   
+ .nav-link {
+    color: #000;
+      font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(1rem, 1.5vw, 2.5rem);
+    font-weight: normal;
+}
+
+.nav a {
+  display: inline-block; 
+  position: relative;
+  
+}
+
+.nav a:hover {
+    color: #000;
+}
+
+   .nav a::before {       
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            white-space: nowrap;
+    
+        }
+
+     a:hover::before {
+            opacity: 1;
+              }
+
+
+.nav-link i {
+  display: block;
+  transition: transform .22s cubic-bezier(.2,.9,.3,1);
+  transform-origin: center;
+}
+
+ .nav-link::before {
+  content: ""; 
+  position: absolute;
+  right: calc(100% + 12px);   
+  top: 50%;
+  transform: translateX(-18px) translateY(-50%); 
   opacity: 0;
-  animation: fadeIn 0.6s forwards 0.3s; /* jemné postupné zobrazení */
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  background: rgba(0,0,0,0.78);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: transform .26s cubic-bezier(.2,.9,.3,1), opacity .2s ease;
+  pointer-events: none; 
+  z-index: 50;
+}
+
+
+ .nav-link:hover::before {
+  transform: translateX(0) translateY(-50%);
+  opacity: 1;
+}
+ .nav-link:hover i,
+ .nav-link:focus i {
+  transform: scale(1.18);
+}
+
+.nav .home::before      { content: "Domů"; }
+.nav .about::before     { content: "O mně"; }
+.nav .projekty::before  { content: "Projekty"; }
+.nav .blog::before      { content: "Blog"; }
+.nav .kontakt::before   { content: "Kontakt"; }
+
+
+.menu-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 900;
+  border: none;
+  background: #fff;  
+  font-size: 3rem;
+  cursor: pointer;
+  color: #000;
+}
+
+/* navigace */
+nav {
+  position: fixed;
+  top: 0;
+  right: -250px; /* schovaná vpravo */
+  width: 220px;
+  height: 100%;
+ /* background: rgba(255,255,255,0.7); */
+ background-color: #fff;
+  transition: right 0.3s ease-in-out;
+  z-index: 500;
+  box-shadow: -6px -1px 21px -8px rgba(0,0,0,0.51);
+-webkit-box-shadow: -6px -1px 21px -8px rgba(0,0,0,0.51);
+-moz-box-shadow: -6px -1px 21px -8px rgba(0,0,0,0.51);
+}
+
+nav.open {
+  right: 0; /* vyjede */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+}
+
+nav li {
+  margin: 0.5rem 0;
+}
+
+
+/* projekty - draggable gallery */
+.draggable-gallery {
+  overflow-x: auto;
+  cursor: grab;
+  scroll-behavior: auto;
+  user-select: none;
+}
+.draggable-gallery img {
+  transition: transform 0.3s;
+}
+.draggable-gallery img:hover {
+  transform: scale(1.05);
+}
+.draggable-gallery.active {
+  cursor: grabbing;
+}
+.draggable-gallery > .col-sm-3 {
+  flex: 0 0 calc((100% / 3.5)); /* zobrazí 3 celé + 1 částečně */
+
+}
+
+
+/* zvětšení obrázku při hoveru (projekty) */
+
+.grow {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+ 
+}
+
+.grow:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.collapse {
+  margin-top: 1rem;
+  padding-top: 1rem;
+border-top: 1px dashed #666;
+color: #666;
+}
+
+
+.photoshop img {
+  max-height: 200px; 
+  height: auto;
+  width: auto; 
+  object-fit: contain; 
+}
+
+
+
+/* modal start */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  padding-top: 5vh;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+.modal-content {
+  display: block;
+  margin: auto;
+ max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain; 
+  border-radius: 0;
+  background-color: rgba(0,0,0,0.0);
+}
+
+@keyframes zoom {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 @keyframes fadeIn {
+  from { opacity: 0; }
   to { opacity: 1; }
-}  
-    
-.section:nth-child(1) {
-  top: 0;
-  left: 0;
-  background: #f06060;
-}
-.section:nth-child(2) {
-  top: 0;
-  left: 50%;
-  background: #fa987d;
-}
-.section:nth-child(3) {
-  top: 50%;
-  left: 0;
-  background: #72cca7;
-}
-.section:nth-child(4) {
-  top: 50%;
-  left: 50%;
-  background: #10a296;
-}
-.section.is-expanded {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  inset: 0;
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-  cursor: auto;
-}
-.has-expanded-item .section:not(.is-expanded) {
-  transform: scale3d(0, 0, 0);
-  opacity: 0;
 }
 
-.close-section {
+.close {
   position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  font-size: 2rem;
-  line-height: 1;
-  text-align: center;
+  top: 15px;
+  right: 35px;
   color: #fff;
-  opacity: 0;
+  font-size: 40px;
   cursor: pointer;
-  pointer-events: none;
-  transition: opacity 0.1s linear;
-  will-change: opacity;
-}
-.section.is-expanded .close-section {
-  opacity: 1;
-  pointer-events: auto;
-  transition-duration: 0.2s;
-  transition-delay: 0.6s;
 }
 
-
-.box {
-  height: 100vh;
-color: #fff;
-    padding: 8%;
-    overflow-y: auto;
+.close:hover {
+  color: #bbb;
 }
-    
-    .box h1 {
+
+#caption {
+  margin: 20px auto;
+  text-align: center;
+  color: #ccc;
+  font-size: 1rem;
+  max-width: 90%;
+}
+/* modal konec */
+
+.line {
+    border-top: 3px solid;
+    width: 50px;
+    margin-top: 40px;
+    padding-bottom: 40px;
+} 
   
+.shadowbtn {
+box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
 }
+
+.shadowbtn:hover {
+transform: translateY(-2px);
+}
+
+.shadowbtn:active  {
+box-shadow: none;
+}
+
+.tech-icons { 
+  margin-bottom: 3rem;
+}
+
+
+.tech-icons img {
+  width: 45px;
+}
+
+.tech-item {
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #fff;
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  font-size: .9rem;
+}
+
+.hello {
+  
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(3rem, 6vw, 8rem);  
+    color: var(--blue);
+    line-height: 125%;    
+}
+
+.blinking-cursor {
+  font-size: clamp(3rem, 7vw, 10rem);  
+ color: #000;
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+   color: #000;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+   color: #000;
+  }
+}
+
+@-webkit-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+ color: #000;
+  }
+}
+
+@-ms-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+  color: #000;
+  }
+}
+
+@-o-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+   color: #000;
+  }
+}
+  
+
+/* wrapper pro sekce */
+.section-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%; 
+ 
+}
+
+/* sekce absolutně */
+section {
+  position: absolute; top:0; left:0; width:100%; height:100%;
+   box-sizing:border-box;
+  transition: transform .6s ease-out;
+  overflow: auto; 
+ 
+ }
+  
+  /* všechny sekce výchozí stav – schované vpravo */
+section {
+  transform: translateX(100%);
+}
+
+/* první sekce výchozí viditelná */
+section:first-of-type {
+  transform: translateX(0);
+  z-index: 1;
+}
+
+  .content {
+   background-color: #fff;   
+color: #000;
+
+  }
+  
+
+    #one, #two, #three, #four, #five {
+ padding: 4%;
+ background-color: #fff;
+box-shadow: -11px -1px 21px -8px rgba(0,0,0,0.51);
+-webkit-box-shadow: -11px -1px 21px -8px rgba(0,0,0,0.51);
+-moz-box-shadow: -11px -1px 21px -8px rgba(0,0,0,0.51);
+  }
+  
+#one {
+  background-image: url(images/back5.jpg);  
+  background-repeat: no-repeat;
+  background-size: cover ;
+  background-position: top right;
+  display: flex;
+  align-items: flex-end;
+  
+ }
+  
+ @media (max-width: 767.98px) {
+  .draggable-gallery > .col-sm-3 {
+    flex: 0 0 calc(100% / 1.3); /* 1 celý + kus druhého */
+  }
+}
+  
+  
+  @media (max-width: 575.98px) { 
     
+.menu-toggle {
+  position: fixed;
+  top: 0rem;
+  right: .5rem;
+
+}
+
+
+      .content {
+   background-color: #fff;
+    background-image:none;  
+ 
+  }
+
+  #one, #two, #three, #four, #five {
+ padding: 1rem;
+    background-color:#fff; 
+  }
+    
+    
+       .contact-info {
+  padding-top: 1rem;
+       margin: 0rem 0rem 3.4rem 0rem;
+
+    }
+
+    .photoshop img {
+  max-height: 150px; 
+
+}
+  
+  }
+  
 </style>
 </head>
 <body>
+<div class="container-fluid section-wrapper">
+  
+  <button class="menu-toggle" id="menuToggle">
+  <i class="bi bi-list"></i> <!-- hamburger -->
+</button>
+  
+<nav id="mainNav">
+  <ul class="nav flex-column">
+    <li class="nav-item mb-5"><a href="#" class="nav-link home" id="home" aria-current="page"  data-target="one"> <i class="bi bi-house fs-1"></i></a></li> 
+   
+    <li class="nav-item"><a href="#"  class="nav-link about" id="about" aria-current="page" data-target="two">  <i class="bi bi-person fs-1"></i></a></li>
+    
+    <li class="nav-item"><a href="#" class="nav-link projekty" id="projekty" aria-current="page" data-target="three"><i class="bi bi-laptop fs-1"></i></a></li>
+    
+        <li class="nav-item d-none"><a href="#" class="nav-link blog" id="blog" aria-current="page" data-target="four">  <i class="bi bi-pen fs-1"></i></a></li>
+    
+    <li class="nav-item"><a href="#" class="nav-link kontakt" id="kontakt" aria-current="page" data-target="five"><i class="bi bi-envelope fs-1"></i></a></li>
+    
+  </ul>
+  
 
-<main>
-  <section class="section"><div class="close-section">&times;</div>
-      
-      <div class="box">
-        <h1>O mně <i class="bi bi-person fs-1"> </i>  </h1>   
+</nav>
+
+
+  <section id="one"> 
+ 
+           <header>
+      <h1>Pavel Doubravský</h1>  
           
-         
- <div class="visible">
+   
+    <div class="hello">&#60;h1&#62;<span class="text-black">Hello, World!</span><span style="white-space: nowrap">&#60;/h1&#62;</span><span class="blinking-cursor">|</span></div>
+   </header>   
+  </section>
+  
+
+  <section id="two">
+     
+          <div class="content">
+
+        <h2>O mně</h2>  
+        <div class="line"></div>    
+            
             <p>
-            Více než 15 let zkušeností s HTML, CSS a Photoshopem při práci pro společnost Monster Worldwide na poy HTML coder.<br>
-              Jako samouk jsem postupně rozšířil své dovednosti např. o Bootstrap, JavaScript, React a další moderní technologie.<br>
+            Více než 15 let zkušeností s HTML, CSS a Photoshopem při práci pro společnost Monster Worldwide na pozici HTML kodéra.<br>
+              Jako samouk postupně rozšiřuji své dovednosti např. o Bootstrap, JavaScript a další moderní technologie.<br>
               Zajímám se o vše kolem web designu, nových přístupů  a aktuálních trendů, rád si usnadním život použitím AI. </p>
  <p>U svých projektů dbám hlavně na responzivitu layoutu, optimalizaci pro mobilní zařízení.<br>
 V rámci SEO se snažím o čistý, přehledný kód, o rychlé načítání. <br>
 Aplikuji obecné UI/UX principy a zároveň i ty moderní, pokud to dává smysl. 
-   </p>  
-     
-       <h4>Tady jsem doma!</h4>
+   </p>         
+            
+
+  <div class="line"></div>           
+            
+            <h4>Tady jsem doma!</h4>
             
 <div class="tech-icons d-flex flex-wrap gap-4">
   <div class="tech-item text-center">
@@ -176,6 +614,13 @@ Aplikuji obecné UI/UX principy a zároveň i ty moderní, pokud to dává smysl
   
     <div>Figma</div>
   </div>
+
+    <div class="tech-item text-center">
+  
+      <img src="https://img.icons8.com/?size=100&id=63777&format=png&color=000000" alt="GitHub" class="img-fluid" >
+  
+    <div>GitHub</div>
+  </div>
     </div>
             
             
@@ -188,31 +633,31 @@ Aplikuji obecné UI/UX principy a zároveň i ty moderní, pokud to dává smysl
   
     <div>JavaScript</div>
   </div>
-  <div class="tech-item text-center">
+  <div class="tech-item text-center d-none">
    
       <img src="https://img.icons8.com/?size=100&id=wPohyHO_qO1a&format=png&color=000000" alt="React" class="img-fluid" >
    
     <div>React</div>
   </div>
-  <div class="tech-item text-center">
+  <div class="tech-item text-center d-none">
 
       <img src="https://img.icons8.com/?size=100&id=9Um0Q4sZ0QCC&format=png&color=000000" alt="jQuery" class="img-fluid" >
    
     <div>jQuery</div>
   </div>
-  <div class="tech-item text-center">
+  <div class="tech-item text-center d-none">
     
       <img src="https://cdn-icons-png.flaticon.com/512/6422/6422229.png" alt="PHP" class="img-fluid" >
     
     <div>PHP</div>
   </div>
-  <div class="tech-item text-center">
+  <div class="tech-item text-center d-none">
    
       <img src="https://img.icons8.com/?size=100&id=UFXRpPFebwa2&format=png&color=000000" alt="MySQL" class="img-fluid" >
    
     <div>MySQL</div>
   </div>
-  <div class="tech-item text-center">
+  <div class="tech-item text-center d-none">
   
       <img src="https://img.icons8.com/?size=100&id=13441&format=png&color=000000" alt="Python" class="img-fluid" >
   
@@ -237,54 +682,416 @@ Aplikuji obecné UI/UX principy a zároveň i ty moderní, pokud to dává smysl
     <div>DaVinci Resolve</div>
   </div>
 </div>
-     
-     
-                     <p>
-            Více než 15 let zkušeností s HTML, CSS a Photoshopem při práci pro společnost Monster Worldwide na poy HTML coder.<br>
-              Jako samouk jsem postupně rozšířil své dovednosti např. o Bootstrap, JavaScript, React a další moderní technologie.<br>
-              Zajímám se o vše kolem web designu, nových přístupů  a aktuálních trendů, rád si usnadním život použitím AI. </p>
- <p>U svých projektů dbám hlavně na responzivitu layoutu, optimalizaci pro mobilní zařízení.<br>
-V rámci SEO se snažím o čistý, přehledný kód, o rychlé načítání. <br>
-Aplikuji obecné UI/UX principy a zároveň i ty moderní, pokud to dává smysl. 
-   </p>  
-     
-     
- </div> 
-     
-          
-      </div>   
+
+    <p class="text-secondary small pt-5">Icons by <a href="https://icons8.com" target="_blank" class="text-secondary">icons8.com</a></p>      
+   </div> 
+
+  
+  </section>
+  
+  
+  <section id="three">
+     <div class="content">
       
-    </section>
-  <section class="section"><div class="close-section">&times;</div><div class="box">Section 2</div></section>
-  <section class="section"><div class="close-section">&times;</div><div class="box">Section 3</div></section>
-  <section class="section"><div class="close-section">&times;</div><div class="box">Section 4</div></section>
-</main>
+          <h2>Projekty</h2>  
+        <div class="line"></div>    
+            <h3>Weby</h3>
+<div class="row mt-2 pb-4 mb-5 flex-nowrap draggable-gallery weby">
+
+        <div class="col-sm-3 col-12 overflow-hidden">
+                  
+                  <a href="https://dinoprior.github.io/Fitmania/index.html" target="_blank"><img src="images/fitmania_web.jpg" class="img-fluid grow shadow-sm" alt="Fitmania web"></a>
+   
+  <div class="mt-3 border border-secondary p-3 rounded shadow-sm">
+    <div class="d-flex justify-content-between">
+    <h5>Fitmania <small>(demo)</small></h5> 
+       <div class="border-start border-secondary ps-2">
+    <a href="https://www.figma.com/design/JzsQvsuDBzCUlwYIGF15lv/Fitmania?node-id=0-1&t=lIuRKyAIbSUo3eXj-1" target="_blank">_Figma</a>  &nbsp; 
+     <a href="#" data-bs-toggle="collapse" data-bs-target="#web-info1">_info</a> 
+  </div>
+</div>
+  
+ <div id="web-info1" class="collapse">
+  <ul>
+ <li>Web s použitím Bootstrapu</li>
+  <li>Moderní design s background videem</li>
+  <li> Individuálně postavená sekce novinek a galerie za pomoci AI</li>
+   <li> Modal kartičky u trenérů</li>
+     <li> Formulář pro přihlášení</li>
+</ul> </div> 
+ </div>
+    </div>
+              <div class="col-sm-3 col-12 overflow-hidden">
+            <a href="https://dinoprior.github.io/Apartman/index.html" target="_blank"><img src="images/Apartman_web.jpg" class="img-fluid grow shadow-sm" alt="Apartmán web"></a>
+    </a>
+
+  <div class="mt-3 border border-secondary p-3 rounded shadow-sm">
+    <div class="d-flex justify-content-between">
+       <h5>Apartmán <small>(demo)</small></h5>
+        <div class="border-start border-secondary ps-2">
+  <a href="https://www.figma.com/design/okMr8Z0mTXHQTj0UzyCUY2/Apartm%C3%A1n?node-id=0-1&t=jfeZ840ER92fW7si-1" target="_blank">_Figma</a> &nbsp; 
+  <a href="#" data-bs-toggle="collapse" data-bs-target="#web-info2">_info</a>  
+    </div></div> 
+ <div id="web-info2" class="collapse">
+  <ul>
+ <li>Dvojjazyčný web s použitím Bootstrapu</li>
+  <li>Funkční rezervační formulář </li>
+  <li> Google recenze</li>
+   <li> FadeIn efekty při skrolování</li>
+</ul> 
+ </div></div>
+    </div>
+
+        
+     <div class="col-sm-3 col-12 overflow-hidden">
+            <a href="https://dinoprior.github.io/Starter/index.html" target="_blank"><img src="images/starter_web.jpg" class="img-fluid grow shadow-sm" alt="Starter web"></a>
+    </a>
+  <div class="mt-3 border border-secondary p-3 rounded shadow-sm">
+    <div class="d-flex justify-content-between">
+      <h5>Developer's starter&nbsp;page</h5> 
+      <div class="border-start border-secondary ps-2">
+      <a href="#" data-bs-toggle="collapse" data-bs-target="#web-info3">_info</a>
+    </div></div> 
+    
+ <div id="web-info3" class="collapse">
+  <ul>
+ <li>Stránka k procviční Javascriptu  </li>
+  <li>Obrázky na pozadí jdou měnit, přepínač pro změnu barvy některých prvků </li>
+  <li>Pole pro zadání úkolu dne, oslovení</li>
+   <li>Aktuální zobrazení svátku, datumu apod.</li>
+    <li>Zpravodajství</li>
+    <li>Plně funkční časovač pro přípravu kávy</li>
+</ul> 
+ </div></div>
+    </div>
+    
+     <div class="col-sm-3 col-12 overflow-hidden">
+            <a href="https://dinoprior.github.io/Valeton/index.html" target="_blank"><img src="images/Valeton_web.jpg" class="img-fluid grow shadow-sm" alt="Valeton web"></a>
+    </a>
+  <div class="mt-3 border border-secondary p-3 rounded shadow-sm">
+    <div class="d-flex justify-content-between">
+      <h5>Valeton GP-5 <small>(demo)</small></h5> 
+  <div class="border-start border-secondary ps-2">
+  <a href="https://www.figma.com/design/JAvpfdZB43CZZQoFet2Ycy/Valeton?node-id=0-1&t=M7vpBx5H9toXgCto-1" target="_blank">_Figma</a>   &nbsp;
+  <a href="#" data-bs-toggle="collapse" data-bs-target="#web-info4">_info</a> 
+    </div></div> 
+ <div id="web-info4" class="collapse">
+  <ul>
+ <li>Web s použitím Bootstrapu </li>
+  <li>FadeIn efekty při skrolování</li>
+</ul> 
+ </div></div>
+    </div>
+    
+              <div class="col-sm-3 col-12 overflow-hidden">
+            <a href="https://dinoprior.github.io/cukrarna/index.html" target="_blank"><img src="images/cukrarna_web.jpg" class="img-fluid grow shadow-sm" alt="Cukrárna web"></a>
+    </a>
+
+     <div class="mt-3 border border-secondary p-3 rounded shadow-sm">
+    <div class="d-flex justify-content-between">
+      
+      <h5>Cukrárna <small>(demo)</small></h5> 
+   <div class="ms-auto text-end border-start border-secondary ps-2">
+      <a href="#" data-bs-toggle="collapse" data-bs-target="#web-info5">_info</a>
+    </div></div> 
+ <div id="web-info5" class="collapse">
+  <ul>
+ <li>Web s použitím Bootstrapu </li>
+  <li>FadeIn efekty při skrolování</li>
+</ul> 
+ </div></div>
+    </div>
+
+</div>  
+        
+
+         <h3>Photoshop</h3>
+<div class="row mt-2 pb-4 flex-nowrap draggable-gallery photoshop">
+
+  <img src="images/amerfotbal.jpg" alt="Americký fotbal plakát" class="img-fluid grow me-4" title="Návrh sportovního plakátu, rozmazání běžce, nápis na postavě je průhledný">  
+<img src="images/Samsung.jpg" alt="Samsung banner" class="img-fluid grow me-4" title="Návrh banneru pro Samsung">
+  <img src="images/Sparta plakát.jpg" alt="Sparta plakát" class="img-fluid grow me-4" title="Návrh sportovního plakátu">  
+ 
+    
+      <img src="images/Brod.jpg" alt="Brod plakát" class="img-fluid grow me-4" title="Návrh plakátu pro hudební festival">
+    <img src="images/Brod 2.jpg" alt="Brod plakát" class="img-fluid grow me-4" title="Návrh plakátu pro hudební festival">
+     <img src="images/zed.jpg" alt="zed" class="img-fluid grow me-4" title="Umístění nápisu na zeď s komplikovanou strukturou">
+     <img src="images/lion_woman.jpg" alt="lion_woman" class="img-fluid grow me-4" title="Kombinace dvou fotografií">
+    <img src="images/triko_kfc.jpg" alt="kfc triko" class="img-fluid grow me-4" title="Umístění loga na triko s přizpůsobením perspektivy a textury">
+     <img src="images/baletka.jpg" alt="Baletka" class="img-fluid grow me-4" title="Efekt rozmazání/rozpadání">  
+     <img src="images/divka_za_sklem.jpg" alt="dívka za sklem" class="img-fluid grow" title="Umístění efetku skla na fotografii">
+    
+         </div>
+        </div>   
+        
+
+
+  </section>
+  
+  
+   <section id="four d-none">
+     <div class="content">
+      
+          <h2>Blog</h2>  
+        <div class="line"></div>    
+
+                  
+            
+  </div>  
+  </section> 
+  
+    
+   <section id="five">
+     <div class="content">
+      
+          <h2>Kontakt</h2>  
+        <div class="line"></div>    
+<h3>Pošlete mi zprávu</h3>
+             <div class="row pt-3">        
+ <div class="col-sm-6">
+  <form id="contactForm" class="needs-validation" action="send.php" method="POST" novalidate>
+    <div class="mb-3">
+      <label for="inputEmail" class="form-label d-none">Váš e-mail</label>
+      <input type="email" class="form-control border-bottom" id="inputEmail" name="email" placeholder="Váš e-mail" required>
+      <div class="invalid-feedback">Prosím, zadejte platný e-mail.</div>
+    </div>
+
+    <div class="mt-5 mb-3">
+      <label for="inputMessage" class="form-label d-none">Zpráva</label>
+      <textarea class="form-control border-bottom" id="inputMessage" name="message" rows="4" placeholder="Vaše zpráva..." required></textarea>
+      <div class="invalid-feedback">Zpráva nesmí být prázdná.</div>
+    </div>
+
+    <button class="btn btn-primary shadowbtn float-end" type="submit">Odeslat</button>
+  </form>
+  </div> <!-- contact-form -->
+              
+              
+             <!-- Kontaktní info -->
+        <div class="col-sm-4 mt-3 mt-sm-0 contact-info">
+          <p class="border-bottom pb-3"><i class="bi bi-envelope-fill"></i><a href="mailto:xy@domena.cz">xy@domena.cz</a></p>
+          <p class="border-bottom pb-3"><i class="bi bi-linkedin"></i><a href="https://www.linkedin.com/in/vasprofil" target="_blank">LinkedIn profil</a></p>
+          <p><i class="bi bi-telephone-fill"></i>+420 123 456 789</p>
+    
+        </div>         
+          
+   </div>  <!-- contact wrapper -->       
+             </div> 
+  
+  </section> 
+  
+  
+  
+</div> <!-- content - wrapper -->
+
+<div id="imgModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+  <div id="caption"></div>
+</div>
 
 <script>
-const wrapper = document.body;
-const sections = [...document.querySelectorAll(".section")];
-const closeButtons = [...document.querySelectorAll(".close-section")];
-const expandedClass = "is-expanded";
-const hasExpandedClass = "has-expanded-item";
+const sections = document.querySelectorAll('section');
+let current = sections[0]; // první sekce jako výchozí
 
-sections.forEach(section => {
-  section.addEventListener("click", () => {
-    if(section.classList.contains(expandedClass)) return;
-    section.classList.add(expandedClass);
-    wrapper.classList.add(hasExpandedClass);
+// Nastavení počátečních pozic
+sections.forEach(sec => {
+  if (sec !== current) {
+    sec.style.transform = 'translateX(100%)';
+  } else {
+    sec.style.transform = 'translateX(0)';
+    sec.style.zIndex = 1;
+  }
+});
+
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const targetId = link.dataset.target;
+    const next = document.getElementById(targetId);
+    if (next === current) return;
+
+    // ulož aktuální sekci do localStorage
+    localStorage.setItem('lastSection', targetId);
+
+    // posuň
+    next.style.transform = 'translateX(100%)';
+    next.style.zIndex = 2;
+    void next.offsetWidth; // repaint
+    next.style.transform = 'translateX(0)';
+
+    next.addEventListener('transitionend', function handler() {
+      current.style.transform = 'translateX(100%)';
+      current.style.zIndex = 0;
+      next.style.zIndex = 1;
+      current = next;
+      next.removeEventListener('transitionend', handler);
+    });
   });
 });
 
-closeButtons.forEach(button => {
-  button.addEventListener("click", e => {
-    e.stopPropagation();
-    const section = button.parentElement;
-    if(!section.classList.contains(expandedClass)) return;
-    section.classList.remove(expandedClass);
-    wrapper.classList.remove(hasExpandedClass);
+// --- NAVIGACE ---
+const menuToggle = document.getElementById("menuToggle");
+const nav = document.getElementById("mainNav");
+let isOpen = false;
+
+function updateIcon() {
+  menuToggle.innerHTML = isOpen
+    ? '<i class="bi bi-x"></i>'
+    : '<i class="bi bi-list"></i>';
+}
+
+menuToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  isOpen = !isOpen;
+  nav.classList.toggle("open", isOpen);
+  updateIcon();
+});
+
+document.querySelectorAll("#mainNav a").forEach(link => {
+  link.addEventListener("click", () => {
+    isOpen = false;
+    nav.classList.remove("open");
+    updateIcon();
+  });
+});
+
+document.addEventListener("click", (e) => {
+  if (isOpen && !nav.contains(e.target) && !menuToggle.contains(e.target)) {
+    isOpen = false;
+    nav.classList.remove("open");
+    updateIcon();
+  }
+});
+
+// --- GALERIE ---
+document.addEventListener("DOMContentLoaded", () => {
+  const galleries = document.querySelectorAll(".draggable-gallery");
+  const modal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+  const caption = document.getElementById("caption");
+  const closeBtn = document.querySelector(".close");
+
+  galleries.forEach(gallery => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let moved = false;
+    let lastX;
+    let velocity = 0;
+    let momentumID;
+    let momentumActive = false;
+    let preventClick = false;
+
+    // --- DRAG START ---
+    function start(x) {
+      isDown = true;
+      moved = false;
+      preventClick = false;
+      gallery.classList.add("active");
+      startX = x - gallery.offsetLeft;
+      scrollLeft = gallery.scrollLeft;
+      velocity = 0;
+      lastX = x;
+      cancelMomentumScroll();
+    }
+
+    function move(x) {
+      if (!isDown) return;
+      const dx = x - startX;
+      const walk = dx * 1.2;
+      gallery.scrollLeft = scrollLeft - walk;
+      velocity = x - lastX;
+      lastX = x;
+      if (Math.abs(dx) > 5) {
+        moved = true;
+        preventClick = true;
+      }
+    }
+
+    function end() {
+      if (!isDown) return;
+      isDown = false;
+      gallery.classList.remove("active");
+      beginMomentumScroll();
+
+      // drobná prodleva, aby se neaktivoval click
+      if (preventClick) {
+        setTimeout(() => (preventClick = false), 50);
+      }
+    }
+
+    // --- MOMENTUM ---
+    function beginMomentumScroll() {
+      if (momentumActive) return;
+      momentumActive = true;
+      momentumID = requestAnimationFrame(momentumLoop);
+    }
+
+    function cancelMomentumScroll() {
+      momentumActive = false;
+      cancelAnimationFrame(momentumID);
+    }
+
+    function momentumLoop() {
+      gallery.scrollLeft -= velocity;
+      velocity *= 0.95;
+      if (Math.abs(velocity) > 0.5) {
+        momentumID = requestAnimationFrame(momentumLoop);
+      } else {
+        momentumActive = false;
+      }
+    }
+
+    // --- MOUSE ---
+    gallery.addEventListener("mousedown", e => {
+      e.preventDefault();
+      start(e.pageX);
+    });
+    gallery.addEventListener("mousemove", e => move(e.pageX));
+    gallery.addEventListener("mouseup", end);
+    gallery.addEventListener("mouseleave", end);
+
+    // --- TOUCH ---
+    gallery.addEventListener("touchstart", e => start(e.touches[0].pageX), { passive: true });
+    gallery.addEventListener("touchmove", e => move(e.touches[0].pageX), { passive: true });
+    gallery.addEventListener("touchend", end);
+
+    // --- BLOKOVÁNÍ ODKAZŮ PO DRAGU ---
+    gallery.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", e => {
+        if (preventClick) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    });
+
+    // --- MODAL ---
+    gallery.querySelectorAll("img").forEach(img => {
+      img.addEventListener("click", e => {
+        if (preventClick) return;
+
+        // pokud je obrázek uvnitř odkazu, modal se nespustí
+        if (img.closest("a")) return;
+
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        caption.textContent = img.title || img.alt || "";
+      });
+    });
+  });
+
+  // --- ZAVŘENÍ MODALU ---
+  closeBtn.addEventListener("click", () => (modal.style.display = "none"));
+  modal.addEventListener("click", e => {
+    if (e.target === modal) modal.style.display = "none";
   });
 });
 </script>
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  </body>
 
 </body>
 </html>
