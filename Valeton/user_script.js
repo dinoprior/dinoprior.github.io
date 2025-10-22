@@ -58,3 +58,21 @@ function backToTop() {
 
   requestAnimationFrame(animateScroll);
 }
+
+
+// navbar a body height
+window.addEventListener("scroll", function() {
+  const navbar = document.querySelector("nav.sticky-top");
+  const htmlTag = document.documentElement; // <html>
+  const bodyTag = document.body;
+
+  if (!navbar) return;
+
+  const rect = navbar.getBoundingClientRect();
+  const atTop = rect.top <= 0; // kdy je navbar na vrchu
+
+  // Když navbar dorazí na vrchol, přidáme třídu
+  htmlTag.classList.toggle("no-full-height", atTop);
+  bodyTag.classList.toggle("no-full-height", atTop);
+  navbar.classList.toggle("at-top", atTop);
+});
