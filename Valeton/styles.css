@@ -101,7 +101,8 @@ nav.at-top {
 .navbar-nav a  {
   position: relative;
   text-decoration: none; /* vypnout default underline */
-  
+  font-weight: bold;
+  color: black;
 }
 
 .navbar-nav a::after  {
