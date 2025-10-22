@@ -146,6 +146,13 @@ margin: 15px 15px 0 0;
   will-change: opacity;
 }
 
+.close-section:hover {
+transform: rotate(45deg);
+-webkit-transform: rotate(45deg);
+-moz-transform: rotate(45deg);
+
+}
+
 .section.is-expanded .close-section {
   opacity: 1;
   pointer-events: auto;
