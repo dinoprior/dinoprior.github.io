@@ -75,7 +75,7 @@
   top: 0;
   left: 0;
   background: #f5f5f0;
-  background-image: url("https://images.pexels.com/photos/30369199/pexels-photo-30369199.jpeg");
+  background-image: url("aa.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -87,7 +87,7 @@
   top: 0;
   left: 50%;
   background: #e6e8ea;
-  background-image: url("https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg");
+  background-image: url("bb.jpeg");
     background-repeat: no-repeat;
   background-size: cover;
    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
@@ -98,7 +98,7 @@
   top: 50%;
   left: 0;
   background: #dfe7e3;
-  background-image: url("https://images.pexels.com/photos/1572878/pexels-photo-1572878.jpeg");
+  background-image: url("cc.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
@@ -109,7 +109,7 @@
   top: 50%;
   left: 50%;
   background: #e8dfeb;
-  background-image: url("https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg");
+  background-image: url("dd.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
@@ -524,38 +524,59 @@ lightbox.addEventListener('click', (e) => {
 // kurzor
 const cursor = document.getElementById('cursor');
 
-let mouseX = 0;
-let mouseY = 0;
-let currentX = 0;
-let currentY = 0;
-const speed = 0.1; // menší číslo = větší zpoždění
-let isMouseActive = false;
+// Nejprve zkontrolujeme, zda nejde o dotykové zařízení
+if (!('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
 
-// Na začátku skrytý
-cursor.style.opacity = 0;
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  const speed = 0.1;
+  let isMouseActive = false;
 
-// Sleduj pohyb myši
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+  // Na začátku kurzor skrytý
+  cursor.style.opacity = 0;
+  cursor.style.transition = 'opacity 0.3s ease';
 
-  if (!isMouseActive) {
+  // Sleduj pohyb myši
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!isMouseActive) {
+      isMouseActive = true;
+      cursor.style.opacity = 1; // zobraz kurzor
+    }
+  });
+
+  // Skryj kolečko, když myš opustí okno
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = 0;
+    isMouseActive = false;
+  });
+
+  // Zobraz kolečko, když se myš vrátí do okna
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = 1;
     isMouseActive = true;
-    cursor.style.opacity = 1; // zobraz kurzor
-  }
-});
+  });
 
-// Animace kurzoru s lehkým zpožděním
-function animateCursor() {
-  if (isMouseActive) {
-    currentX += (mouseX - currentX) * speed;
-    currentY += (mouseY - currentY) * speed;
-    cursor.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+  // Animace kurzoru s lehkým zpožděním
+  function animateCursor() {
+    if (isMouseActive) {
+      currentX += (mouseX - currentX) * speed;
+      currentY += (mouseY - currentY) * speed;
+      cursor.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+    }
+    requestAnimationFrame(animateCursor);
   }
-  requestAnimationFrame(animateCursor);
+
+  animateCursor();
+
+} else {
+  // Pokud je dotykové zařízení → kurzor se skryje úplně
+  cursor.style.display = 'none';
 }
-
-animateCursor();
 </script>
 
 </body>
