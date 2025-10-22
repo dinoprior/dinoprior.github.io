@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photographer portfolio</title>
+    
+
+<style>
+    
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+    
+  * {
+      box-sizing:border-box;
+    }
+    
+  body, html {
+    height:100%;  
+     overflow:hidden;
+     background-color: #000;
+   }
+
+   a {
+    text-decoration: none;
+    color: #000;
+   }
+
+     a:hover {
+    text-decoration: underline;
+    color: #000;
+   }
+
+#cursor {
+  position: fixed;
+  z-index: 200;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+  pointer-events: none;
+    transform: translate(-50%, -50%);
+  transition: transform 0.5s ease-out;
+
+}
+
+  .section {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  cursor: pointer;
+  transform: scale3d(1, 1, 1);
+  will-change: transform, opacity, contents;
+  transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+  /* Přidat na začátek CSS */
+.visible {
+  display: none;      
+  }
+
+.section.is-expanded .visible {
+  display: block;      /* zobrazí se, když je sekce rozkliknutá */
+  opacity: 0;
+  animation: fadeIn 0.6s forwards 0.3s; /* jemné postupné zobrazení */
+  
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}  
+    
+.section:nth-child(1) {
+  top: 0;
+  left: 0;
+  background: #f5f5f0;
+  background-image: url("https://images.pexels.com/photos/30369199/pexels-photo-30369199.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  color: white;
+}
+.section:nth-child(2) {
+  top: 0;
+  left: 50%;
+  background: #e6e8ea;
+  background-image: url("https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg");
+    background-repeat: no-repeat;
+  background-size: cover;
+   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  color: white;
+}
+.section:nth-child(3) {
+  top: 50%;
+  left: 0;
+  background: #dfe7e3;
+  background-image: url("https://images.pexels.com/photos/1572878/pexels-photo-1572878.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  color: white;
+}
+.section:nth-child(4) {
+  top: 50%;
+  left: 50%;
+  background: #e8dfeb;
+  background-image: url("https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  color: white;
+ }
+.section.is-expanded {
+    top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  inset: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  cursor: auto;
+  background-image: none;  
+  overflow: auto; 
+}
+
+.has-expanded-item .section:not(.is-expanded) {
+  transform: scale3d(0, 0, 0);
+  opacity: 0;  
+}
+
+.close-section {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 4rem;
+  line-height: 1;
+  text-align: center;
+  color: #000;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+  will-change: opacity;
+}
+
+.section.is-expanded .close-section {
+  opacity: 1;
+  pointer-events: auto;
+  transition-duration: 0.2s;
+  transition-delay: 0.6s;
+}
+
+
+.box {
+  position: relative; 
+  z-index: 2;
+  height: 100vh;
+color: #000000;
+    padding: 8%;
+    padding-top: 4%;
+    overflow-y: auto;   
+
+}
+
+.section h1 {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+  color: black;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8); 
+  z-index: 1;
+  transition: background 0.5s ease;
+}
+
+.section:hover::before {
+  background: rgba(255, 255, 255, 0); 
+}
+
+.section:hover h1 {
+  color: #fff;
+}
+
+.section.is-expanded::before {
+  background: rgba(255, 255, 255, 0); 
+}
+
+.section.is-expanded h1 {
+color: #000;
+text-shadow: 0px 0px 0px rgba(255,255,255,0.62);
+}
+
+.section.is-expanded h1 span { 
+  background-color: #000;
+  color: #fff;;
+}
+
+p {
+    font-family: "Lato", sans-serif;
+     line-height: 140%;
+      font-size: clamp(2rem, 2.3vw, 6rem); 
+      margin-bottom: 2rem;
+      text-wrap: initial;
+     }
+
+  h1 {
+  font-family: "Cormorant Garamond", serif;
+  line-height: 125%;
+  font-size: clamp(3rem, 6.5vw, 10rem);  
+  margin-bottom: 4rem;
+  color: white;
+}
+
+ h3 {
+  font-family: "Lato", sans-serif;
+  line-height: 125%;
+  font-size: clamp(2.25rem, 2.5vw, 8rem);  
+  margin-bottom: 2rem;
+  font-weight: 900;
+}
+  
+img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  max-width: 100%;
+}
+
+.flex {
+   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex div {
+  width: 46%;
+}
+
+/* gallery */
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.column img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Lightbox overlay */
+#lightbox {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  animation: fadeIn 0.4s ease;
+}
+
+/* The enlarged image */
+#lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  animation: zoomIn 0.4s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes zoomIn {
+  from {transform: scale(0.8);}
+  to {transform: scale(1);}
+}
+
+/* Close button */
+#lightbox span {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#lightbox span:hover {
+  color: #ccc;
+}
+
+
+@media screen and (max-width: 800px) {
+
+.flex {
+   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex div {
+ width: 100%;
+}
+
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+
+}
+
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<main>
+  <section class="section"><div class="close-section">&times;</div>
+      
+      <div class="box">
+        <h1 class=""><span>a</span>bout me</h1>   
+          
+         
+ <div class="visible">
+<div class="flex">
+         <div>   <p>
+ My name is John Smith and photography has always been my way of seeing the world — capturing emotions, light, and fleeting moments that often go unnoticed. My journey began with curiosity and a small camera, but over time it has become a language through which I express creativity and emotion. </p></div>
+<div>
+ <p>Whether I’m shooting portraits, landscapes, or street scenes, I aim to tell honest and meaningful stories. My work is inspired by simplicity, natural light, and the beauty of human connection.
+   </p>  </div>
+</div>     
+   <img src="https://images.pexels.com/photos/19949833/pexels-photo-19949833.jpeg" alt="man behind camera">
+     
+ </div></div>     
+      </section> <!--1-->
+          
+     
+      
+   
+  <section class="section"><div class="close-section">&times;</div>
+    <div class="box">
+    <h1><span>g</span>allery</h1>   
+   <div class="visible">
+
+    <div class="row"> 
+  <div class="column">
+    <img src="https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg" alt="landscape">
+    <img src="https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg" alt="landscape">
+   <img src="https://images.pexels.com/photos/1367105/pexels-photo-1367105.jpeg" alt="landscape"">
+    <img src="https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg" alt="landscape">
+    <img src="https://images.pexels.com/photos/34352808/pexels-photo-34352808.jpeg" alt="landscape">
+    <img src="https://images.pexels.com/photos/1006121/pexels-photo-1006121.jpeg" alt="landscape">
+    <img src="https://images.pexels.com/photos/15562208/pexels-photo-15562208.jpeg" alt="landscape">
+  </div>
+  <div class="column">
+    <img src="https://images.pexels.com/photos/4754648/pexels-photo-4754648.jpeg" alt="portrait">
+    <img src="https://images.pexels.com/photos/818261/pexels-photo-818261.jpeg"  alt="portrait">
+    <img src="https://images.pexels.com/photos/4823732/pexels-photo-4823732.jpeg"  alt="portrait">
+    <img src="https://images.pexels.com/photos/4550985/pexels-photo-4550985.jpeg"  alt="portrait">
+    
+    <img src="https://images.pexels.com/photos/60712/fashion-girl-sexy-women-60712.jpeg"  alt="portrait">
+  </div>  
+  <div class="column">
+   <img src="https://images.pexels.com/photos/209235/pexels-photo-209235.jpeg" alt="still life">
+    <img src="https://images.pexels.com/photos/4153146/pexels-photo-4153146.jpeg" alt="still life">    
+   <img src="https://images.pexels.com/photos/34368859/pexels-photo-34368859.jpeg" alt="still life">
+    <img src="https://images.pexels.com/photos/4946961/pexels-photo-4946961.jpeg" alt="still life">    
+    <img src="https://images.pexels.com/photos/34380861/pexels-photo-34380861.jpeg" alt="still life">
+    <img src="https://images.pexels.com/photos/1083633/pexels-photo-1083633.jpeg" alt="still life">
+    
+      </div>
+  <div class="column">
+    <img src="https://images.pexels.com/photos/1650904/pexels-photo-1650904.jpeg" style="width:100%">
+    <img src="https://images.pexels.com/photos/417273/pexels-photo-417273.jpeg" alt="architecture">
+    <img src="https://images.pexels.com/photos/1759478/pexels-photo-1759478.jpeg" alt="architecture">
+    <img src="https://images.pexels.com/photos/19199486/pexels-photo-19199486.jpeg" style="width:100%">
+    <img src="https://images.pexels.com/photos/210158/pexels-photo-210158.jpeg" style="width:100%">
+    <img src="https://images.pexels.com/photos/776336/pexels-photo-776336.jpeg" style="width:100%">
+  </div>
+</div>
+
+   
+    
+   </div>   </div>
+  </section><!--2-->
+
+
+  <section class="section"><div class="close-section">&times;</div>
+    <div class="box">
+      <h1><span>s</span>ervices</h1>
+        <div class="visible">
+   <div class="flex">
+         <div> 
+  
+     <p> I offer photography sessions tailored to your needs — whether it’s a personal portrait, a brand story, or a special event. Each project is approached with care, creativity, and attention to detail.
+</p></div>
+<div> <p>
+My goal is to create authentic images that reflect your personality, your brand, or the atmosphere of your moment.</p>
+ </div>   </div>
+ </div>      </div>
+  </section><!--3-->
+
+
+  <section class="section"><div class="close-section">&times;</div>
+    <div class="box">
+      <h1><span>c</span>ontact</h1>
+  <div class="visible">
+    
+  
+      <h3>Let’s Connect</h3>
+
+         <div class="flex">
+         <div> 
+<p>I’d love to hear from you. <br>
+  Whether you have a project in mind or just want to say hello, feel free to reach out.</p>
+</div>
+<div>
+<p><img src="https://img.icons8.com/?size=100&id=12580&format=png&color=000000" alt="mail" width="35"> &nbsp; <a href="#">hello@johnsmith.com</a> </p>
+<p><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="instagram logo" width="35"> &nbsp; <a href="#">@johnsmith</a></p>
+ </div> 
+  </div>
+    </div>   </div></section><!--4-->
+</main>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <span id="close">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+const wrapper = document.body;
+const sections = [...document.querySelectorAll(".section")];
+const closeButtons = [...document.querySelectorAll(".close-section")];
+const expandedClass = "is-expanded";
+const hasExpandedClass = "has-expanded-item";
+
+sections.forEach(section => {
+  section.addEventListener("click", () => {
+    if(section.classList.contains(expandedClass)) return;
+    section.classList.add(expandedClass);
+    wrapper.classList.add(hasExpandedClass);
+  });
+});
+
+closeButtons.forEach(button => {
+  button.addEventListener("click", e => {
+    e.stopPropagation();
+    const section = button.parentElement;
+    if(!section.classList.contains(expandedClass)) return;
+    section.classList.remove(expandedClass);
+    wrapper.classList.remove(hasExpandedClass);
+  });
+});
+
+
+//lightbox
+const images = document.querySelectorAll('.column img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.getElementById('close');
+
+images.forEach(img => {
+  img.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.style.display = 'none';
+  }
+});
+
+// kurzor
+const cursor = document.getElementById('cursor');
+
+let mouseX = 0;
+let mouseY = 0;
+let currentX = 0;
+let currentY = 0;
+const speed = 0.1; // menší číslo = větší zpoždění
+let isMouseActive = false;
+
+// Na začátku skrytý
+cursor.style.opacity = 0;
+
+// Sleduj pohyb myši
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  if (!isMouseActive) {
+    isMouseActive = true;
+    cursor.style.opacity = 1; // zobraz kurzor
+  }
+});
+
+// Animace kurzoru s lehkým zpožděním
+function animateCursor() {
+  if (isMouseActive) {
+    currentX += (mouseX - currentX) * speed;
+    currentY += (mouseY - currentY) * speed;
+    cursor.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+  }
+  requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+</script>
+
+</body>
+</html>
