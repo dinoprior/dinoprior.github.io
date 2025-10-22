@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&display=swap');
 
-/* CSS */
+
 :root {
   --ff-heading: 'Anton', 'Helvetica Neue', Arial, sans-serif;
   --ff-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -11,6 +11,7 @@ h1, h2, .logo {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 400;
+  line-height: 120%;
   font-size: clamp(2rem, 5vw, 4rem);
   text-shadow: 0 2px 6px rgba(0,0,0,0.6), 0 0 8px rgba(255,120,20,0.08);
 }
@@ -27,22 +28,23 @@ h3 {
 
 body, p, .btn {
   font-family: var(--ff-body);
-  line-height: 1.6;
+  line-height: 150%;
   font-size: 1rem;
   }
 
-
-html, body {
-  width: auto!important;
-  overflow-x: hidden!important;
-    font-family: 'Trebuchet MS', sans-serif;
-}      
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 
 .jumbo {
         background-image: url("gp2-5-1.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        height: 100%; 
+        padding: 8% 0;
+
       }
 
       .jumbo2 {
@@ -60,6 +62,14 @@ html, body {
         height: 480px;
       }
 
+      .parallax {
+  background-image: url("back4.jpg");
+  min-height: 500px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
       #btn-back-to-top {
   position: fixed;
@@ -70,6 +80,23 @@ html, body {
 }
 
 /* --- animace underline start--- */
+
+nav {
+  transition: linear 0.25s;
+  background-color: rgba(255, 255, 255, 1);
+margin-top: -31px;
+ border-left: 15px solid #0d6efd;
+ border-right: 15px solid #0d6efd;
+ box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav.at-top {
+ background-color: rgba(255, 255, 255, 1);
+  
+  transition: linear 0.25s;
+  width: 100% !important;
+  opacity: 1;
+}
 
 .navbar-nav a  {
   position: relative;
@@ -206,3 +233,25 @@ html, body {
       background-color: transparent !important; /* zruší bg-dark */
     }
   }
+
+@media (max-width: 575.98px) { 
+
+  .jumbo {
+  margin-top: 40px;
+
+      }
+
+  nav.sticky-top {
+position: absolute;
+margin-top: 0;
+width: 100%;
+
+  }
+
+  nav {
+
+ border-left: 7px solid #0d6efd;
+ border-right: 7px solid #0d6efd;
+}
+  
+}
