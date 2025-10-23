@@ -336,6 +336,28 @@ img {
 
 @media screen and (max-width: 800px) {
 
+  .close-section {
+  position: absolute;
+  z-index: 100;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 4rem;
+  line-height: 1;
+  text-align: center;
+  color: #000;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+  will-change: opacity;
+  background-color: #fff;
+}
+
 .flex {
    display: flex;
   flex-direction: column;
