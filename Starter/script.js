@@ -137,7 +137,8 @@ document.addEventListener("click", function(e) {
 });
 
 // Weather
-    const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
+    const api = "AIzaSyCCxtAuY0FN6iGhKdwG_WLoMilRrvmAlcg"; // 🔑 vlož svůj klíč
+
 
 // DOM elementy
 const iconImg = document.getElementById("weather-icon");
@@ -246,7 +247,7 @@ const windDirCz = directionMap[windDirEng] || windDirEng;
 });
 
 // News
-const response = await fetch(`/api/worldnews`);
+  const apiKey = "946ec53909df4d63bbb1df81f137422a"; // 🔑 
     const newsContainer = document.getElementById("news-container");
 
     async function loadNews() {
@@ -279,7 +280,7 @@ const response = await fetch(`/api/worldnews`);
 
 // News 2
 
- const res = await fetch(`/api/newsdata`);
+ const apiKey2 = "pub_56853413b398414cbc2b61c8ff3499a5";
 
   async function loadNewsData(q = "") {
     try {
